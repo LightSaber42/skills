@@ -46,6 +46,37 @@ while [[ $# -gt 0 ]]; do
 done
 
 log() { printf '%s\n' "$*"; }
+
+FORK_SKILLS=(
+  ask-matt code-review codebase-design diagnosing-bugs domain-modeling
+  grill-me grill-with-docs grilling handoff implement improve-codebase-architecture
+  prototype research resolving-merge-conflicts setup-matt-pocock-skills tdd teach
+  to-questionnaire to-spec to-tickets triage wait-what wayfinder wizard writing-for-agents
+)
+
+# ~/.codex is a symlink onto the HC volume. Symlinks from there to
+# ~/.agents/skills (on /) look like missing SKILL.md files to Codex.
+copy_fork_skills_into_codex() {
+  local agents="${HOME}/.agents/skills"
+  local codex="${HOME}/.codex/skills"
+  if [[ ! -d "$agents" ]]; then
+    echo "missing ${agents}" >&2
+    return 1
+  fi
+  mkdir -p "$codex"
+  local name src dest
+  for name in "${FORK_SKILLS[@]}"; do
+    src="${agents}/${name}"
+    dest="${codex}/${name}"
+    if [[ ! -d "$src" ]]; then
+      log "skip ${name}: not in ${agents}"
+      continue
+    fi
+    rm -rf "$dest"
+    cp -a "$src" "$dest"
+    log "copied ${name} -> ${dest}"
+  done
+}
 run() {
   if [[ "$DRY_RUN" -eq 1 ]]; then
     printf '[dry-run] %s\n' "$*"
@@ -151,6 +182,12 @@ if [[ "$SKIP_INSTALL" -eq 1 ]]; then
 else
   log "refreshing global installs from LightSaber42/skills"
   run npx --yes skills@latest update -g -y
+  log "copying fork skills onto the Codex volume (no cross-disk symlinks)"
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    log "[dry-run] copy_fork_skills_into_codex"
+  else
+    copy_fork_skills_into_codex
+  fi
 fi
 
 log "done. local agents now track origin/personal."

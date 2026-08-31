@@ -23,7 +23,7 @@ From this clone:
 ./scripts/sync-from-upstream.sh
 ```
 
-That fetches Matt, fast-forwards `main`, rebases `personal`, pushes both, then runs `npx --yes skills@latest update -g -y` so the copies under `~/.agents/skills` match `personal`.
+That fetches Matt, fast-forwards `main`, rebases `personal`, pushes both, then runs `npx --yes skills@latest update -g -y` so the copies under `~/.agents/skills` match `personal`. It then copies those skills into `~/.codex/skills` as real directories: `~/.codex` lives on the HC volume, and symlinks from there to `~/.agents` on `/` show up in Codex as missing `SKILL.md` files.
 
 Useful flags:
 
