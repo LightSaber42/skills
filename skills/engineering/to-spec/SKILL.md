@@ -16,13 +16,17 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage. Fill **Source** so a later reader can open the cited material and land on the same evidence without replaying this conversation.
 
 <spec-template>
 
 ## Problem Statement
 
 The problem that the user is facing, from the user's perspective.
+
+## Source
+
+The durable material this spec synthesizes: originating documents (path or URL) and locators inside them (numbered items, section headings, finding titles, screenshot names, issue comments). If the only source is this conversation, say that.
 
 ## Solution
 
@@ -52,7 +56,7 @@ A list of implementation decisions that were made. This can include:
 - API contracts
 - Specific interactions
 
-Do NOT include specific file paths or code snippets. They may end up being outdated very quickly.
+Name modules, interfaces, and contracts in prose. Code paths and snippets go stale; omit them.
 
 Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it within the relevant decision and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
 

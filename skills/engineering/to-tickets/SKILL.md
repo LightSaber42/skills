@@ -14,7 +14,7 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 ### 1. Gather context
 
-Work from whatever is already in the conversation context. If the user passes a reference (a spec path, an issue number or URL) as an argument, fetch it and read its full body and comments.
+Work from whatever is already in the conversation context. If the user passes a reference (a spec path, an issue number or URL) as an argument, fetch it and read its full body and comments. Carry originating **source** locators forward; each ticket cites only the locators it covers.
 
 ### 2. Explore the codebase (optional)
 
@@ -46,6 +46,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Title**: short descriptive name
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
+- **Source**: document and locators this ticket covers
 
 Ask the user:
 
@@ -72,6 +73,8 @@ Do NOT close or modify any parent issue.
 
 **What to build:** the end-to-end behaviour this ticket makes work, from the user's perspective, not a layer-by-layer implementation list.
 
+**Source:** originating document(s) and locators this ticket covers.
+
 **Blocked by:** the numbers/titles of the tickets that gate this one, or "None (can start immediately)".
 
 **Status:** ready-for-agent
@@ -86,6 +89,10 @@ Do NOT close or modify any parent issue.
 ## Parent
 
 A reference to the parent issue on the tracker (if the source was an existing issue, otherwise omit this section).
+
+## Source
+
+Originating document(s) and locators this ticket covers. A later reader must be able to open the same evidence without replaying the conversation.
 
 ## What to build
 
@@ -102,4 +109,4 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 </issue-template>
 
-In either form, avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+In either form, name implementation in prose rather than code paths or snippets: they go stale fast. Cite originating **source** documents and locators. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
