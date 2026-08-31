@@ -135,7 +135,7 @@ else
     echo "rebase conflicted. fix files, then:" >&2
     echo "  git add -u && git rebase --continue" >&2
     echo "  git push --force-with-lease origin personal" >&2
-    echo "  npx skills@latest update -g -y" >&2
+    echo "  npx --yes skills@latest update -g -y" >&2
     trap - EXIT
     exit 1
   fi
@@ -150,7 +150,7 @@ if [[ "$SKIP_INSTALL" -eq 1 ]]; then
   log "skipping npx skills update (--skip-install)"
 else
   log "refreshing global installs from LightSaber42/skills"
-  run npx skills@latest update -g -y
+  run npx --yes skills@latest update -g -y
 fi
 
 log "done. local agents now track origin/personal."
