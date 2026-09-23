@@ -5,7 +5,16 @@ argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
+Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save it to `~/.claude/handovers/handoff-<short-topic>-<YYYYMMDD>.md`, not the current workspace. Start it with this frontmatter so the session-start list and `/find-handover` see it:
+
+```
+---
+session: handoff
+project: <the working directory the next session should start in>
+branch: <current git branch>
+generated: <ISO timestamp>
+---
+```
 
 Include a "suggested skills" section in the document, naming which skills the next agent should call the Skill tool for.
 
